@@ -2,7 +2,7 @@ function IMT(mass, height) {
     if (isNaN(mass) || isNaN(height)) {
         return NaN;
     }
-    return mass / (height ** 2);
+    return Math.round((mass / (height ** 2))*100)/100;
 }
 let Button = document.getElementById("calcA");
 let InputMASS= document.getElementById("mass");
@@ -11,10 +11,9 @@ let result2 = document.getElementById("resultIMT");
 let result3 = document.getElementById("resultIMT2");
 
 Button.addEventListener("click", function() {
-    if(InputMASS.value && InputHeight.value){
+    if(+InputMASS.value>=0 && +InputHeight.value>0){
         let imt=IMT(InputMASS.value,InputHeight.value)
         if(InputHeight.value<2.6){
-            imt=imt.toFixed(1);
             result3.textContent=`Ваш имт: ${imt}`;
             if (imt < 16) {
                 result2.textContent = "Выраженный дефицит массы тела.";
